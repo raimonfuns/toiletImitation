@@ -9,6 +9,7 @@ import {
 
 import Search from './read/search';
 import Topic from './read/topic';
+import Recommend from './read/recommend';
 
 class ReadView extends Component{
   constructor(props){
@@ -26,6 +27,8 @@ class ReadView extends Component{
           <ScrollView
             style={[styles.container, {paddingTop:20}]}>
             <Topic navigator={this.props.navigator} />
+            <HrLine/>
+            <Recommend title="热门推荐" navigator={this.props.navigator}/>
           </ScrollView>
         }
       </View>
@@ -43,6 +46,14 @@ class Read extends Component{
           title: '阅读',
           navigationBarHidden: true
       }}/>
+    );
+  }
+}
+
+class HrLine extends Component{
+  render(){
+    return (
+      <View style={styles.hr}></View>
     );
   }
 }
