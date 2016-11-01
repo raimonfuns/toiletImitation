@@ -25,7 +25,7 @@ class ReadView extends Component{
         {
           <ScrollView
             style={[styles.container, {paddingTop:20}]}>
-            <Topic/>
+            <Topic navigator={this.props.navigator} />
           </ScrollView>
         }
       </View>
