@@ -1,17 +1,44 @@
 import React, { Component } from 'react';
 import {
+  StyleSheet,
   Text,
-  View
+  View,
+  NavigatorIOS
   } from 'react-native';
 
-class Read extends Component{
+import Search from './read/search';
+
+class ReadView extends Component{
+  constructor(props){
+    super(props);
+  }
+
   render(){
     return(
-      <View>
-        <Text>阅读</Text>
+      <View style={styles.container}>
+        <Search navigator={this.props.navigator}/>
       </View>
     );
   }
 }
+
+class Read extends Component{
+  render(){
+    return(
+      <NavigatorIOS
+        style={styles.container}
+        initialRoute={{
+          component: ReadView,
+          title: '阅读'
+      }}/>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+ container: {
+    flex: 1
+  }
+});
 
 module.exports = Read;
