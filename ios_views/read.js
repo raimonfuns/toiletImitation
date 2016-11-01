@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   NavigatorIOS,
+  RefreshControl,
   ActivityIndicator
   } from 'react-native';
 
@@ -23,6 +24,7 @@ class ReadView extends Component{
       hotTopic: null,
       category: null,
       other: null,
+      refreshing: false
     };
   }
 
@@ -33,6 +35,12 @@ class ReadView extends Component{
         {
           this.state.isShow ?
             (<ScrollView
+              refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh.bind(this)}
+              />
+              }
               style={[styles.container, {paddingTop:20}]}>
               <Topic data={this.state.recommendTopic} navigator={this.props.navigator} />
               <HrLine/>
@@ -69,7 +77,8 @@ class ReadView extends Component{
           recommendTopic: obj.recommendTopic,
           hotTopic: obj.hotTopic,
           category: obj.category,
-          other: obj.other
+          other: obj.other,
+          refreshing: false
         });
       }else{
         alert('服务异常,正在紧急修复,请耐心等待');
@@ -78,6 +87,12 @@ class ReadView extends Component{
       alert(err);
       alert('服务异常,正在紧急修复,请耐心等待2');
     });
+  }
+
+  _onRefresh(){
+    var self = this;
+    this.setState({refreshing: true});
+    this._fetchData();
   }
 }
 
