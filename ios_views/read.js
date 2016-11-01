@@ -12,6 +12,7 @@ import Util from './util';
 import Search from './read/search';
 import Topic from './read/topic';
 import Recommend from './read/recommend';
+import Category from './read/category';
 
 class ReadView extends Component{
   constructor(props){
@@ -19,7 +20,8 @@ class ReadView extends Component{
     this.state = {
       isShow: false,
       recommendTopic: null,
-      hotTopic: null
+      hotTopic: null,
+      category: null
     };
   }
 
@@ -34,6 +36,9 @@ class ReadView extends Component{
               <Topic data={this.state.recommendTopic} navigator={this.props.navigator} />
               <HrLine/>
               <Recommend title="热门推荐" data={this.state.hotTopic} navigator={this.props.navigator}/>
+              <HrLine/>
+              <Category data={this.state.category} navigator={this.props.navigator}/>
+              <HrLine/>
             </ScrollView>)
             :
             (<ActivityIndicator
@@ -59,7 +64,8 @@ class ReadView extends Component{
         self.setState({
           isShow: true,
           recommendTopic: obj.recommendTopic,
-          hotTopic: obj.hotTopic
+          hotTopic: obj.hotTopic,
+          category: obj.category
         });
       }else{
         alert('服务异常,正在紧急修复,请耐心等待');
@@ -94,8 +100,14 @@ class HrLine extends Component{
 }
 
 const styles = StyleSheet.create({
- container: {
+  container: {
     flex: 1
+  },
+  hr:{
+    borderWidth: Util.pixel,
+    borderColor: '#ccc',
+    marginTop:20,
+    marginBottom:10
   }
 });
 
