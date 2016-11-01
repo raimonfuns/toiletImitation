@@ -29,7 +29,8 @@ class Read extends Component{
         style={styles.container}
         initialRoute={{
           component: ReadView,
-          title: '阅读'
+          title: '阅读',
+          navigationBarHidden: true
       }}/>
     );
   }
