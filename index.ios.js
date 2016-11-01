@@ -1,7 +1,6 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * 找厕所应用
+ * 功能 & 搞笑我们是认真
  */
 
 import React, { Component } from 'react';
@@ -9,45 +8,37 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
-} from 'react-native';
+  View,
+  TabBarIOS
+  } from 'react-native';
 
-export default class toiletImitation extends Component {
+class toiletImitation extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <TabBarIOS barTintColor="#fff" >
+        <TabBarIOS.Item
+          title="卫生间"
+          >
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+          title="阅读"
+          >
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+          title="天气"
+          >
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+          title="设置"
+          >
+        </TabBarIOS.Item>
+      </TabBarIOS>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('toiletImitation', () => toiletImitation);
