@@ -18,7 +18,8 @@ class ReadView extends Component{
     super(props);
     this.state = {
       isShow: false,
-      recommendTopic: null
+      recommendTopic: null,
+      hotTopic: null
     };
   }
 
@@ -32,7 +33,7 @@ class ReadView extends Component{
               style={[styles.container, {paddingTop:20}]}>
               <Topic data={this.state.recommendTopic} navigator={this.props.navigator} />
               <HrLine/>
-              <Recommend title="热门推荐" navigator={this.props.navigator}/>
+              <Recommend title="热门推荐" data={this.state.hotTopic} navigator={this.props.navigator}/>
             </ScrollView>)
             :
             (<ActivityIndicator
@@ -57,7 +58,8 @@ class ReadView extends Component{
         let obj = data.data;
         self.setState({
           isShow: true,
-          recommendTopic: obj.recommendTopic
+          recommendTopic: obj.recommendTopic,
+          hotTopic: obj.hotTopic
         });
       }else{
         alert('服务异常,正在紧急修复,请耐心等待');

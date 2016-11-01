@@ -9,6 +9,7 @@ import {
   TouchableOpacity
   } from 'react-native';
 
+
 import Util from './../util';
 import List from './list';
 import TWebView from './../webview';
@@ -16,32 +17,35 @@ import TWebView from './../webview';
 class Recommend extends Component{
   constructor(props){
     super(props);
+    this.state = {
+      data: this.props.data,
+      type: this.props.type
+    };
   }
   render(){
     let first = [];
     let second = [];
-    var Item = (
-      <View style={styles.topic}>
-        <TouchableOpacity>
-          <View style={styles.shadow}>
-            <Image style={styles.topicImg} source={{uri: "http://7xtp9h.com2.z0.glb.clouddn.com/3.png"}} resizeMode="cover"/>
-          </View>
-          <View style={{marginTop:10}}>
-            <Text style={styles.title} numberOfLines={2}>你什么时候觉得如果自己不努力，背后会是万丈深渊？</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-    
-    first.push(Item);
-    first.push(Item);
-    first.push(Item);
-    first.push(Item);
-    second.push(Item);
-    second.push(Item);
-    second.push(Item);
-    second.push(Item);
+    let data = this.state.data;
+    for(var i in data){
+      var Item = (
+        <View style={styles.topic} key={i}>
+          <TouchableOpacity onPress={this._showDetail.bind(this, data[i].title, data[i].url)}>
+            <View style={styles.shadow}>
+              <Image style={styles.topicImg} source={{uri: data[i].img}} resizeMode="cover"/>
+            </View>
+            <View style={{marginTop:10}}>
+              <Text style={styles.title} numberOfLines={2}>{data[i].title}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      );
+      if(i < 4){
+        first.push(Item);
+      }else{
+        second.push(Item);
+      }
 
+    }
     return(
       <View style={styles.remen}>
         <View>
@@ -53,11 +57,34 @@ class Recommend extends Component{
         <View style={[styles.row, {marginTop:10}]}>
           {second}
         </View>
-        <TouchableOpacity style={styles.tjTQ}>
+        <TouchableOpacity style={styles.tjTQ} onPress={this._showList.bind(this)}>
           <Text style={styles.tjTQText}>查看全部 &gt; </Text>
         </TouchableOpacity>
       </View>
     );
+  }
+
+  _showList(){
+    this.props.navigator.push({
+      component: List,
+      barTintColor: '#fff',
+      title: this.props.title,
+      passProps:{
+        type: this.state.type
+      }
+    });
+  }
+
+  _showDetail(title, url){
+    this.props.navigator.push({
+      component: TWebView,
+      title: title,
+      barTintColor: '#fff',
+      passProps:{
+        url: url,
+        isMargin:1
+      }
+    });
   }
 }
 
