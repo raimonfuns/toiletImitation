@@ -4,9 +4,11 @@ import {
   Text,
   View,
   ScrollView,
-  NavigatorIOS
+  NavigatorIOS,
+  ActivityIndicator
   } from 'react-native';
 
+import Util from './util';
 import Search from './read/search';
 import Topic from './read/topic';
 import Recommend from './read/recommend';
@@ -15,7 +17,8 @@ class ReadView extends Component{
   constructor(props){
     super(props);
     this.state = {
-      isShow: false
+      isShow: false,
+      recommendTopic: null
     };
   }
 
@@ -24,15 +27,45 @@ class ReadView extends Component{
       <View style={styles.container}>
         <Search navigator={this.props.navigator}/>
         {
-          <ScrollView
-            style={[styles.container, {paddingTop:20}]}>
-            <Topic navigator={this.props.navigator} />
-            <HrLine/>
-            <Recommend title="热门推荐" navigator={this.props.navigator}/>
-          </ScrollView>
+          this.state.isShow ?
+            (<ScrollView
+              style={[styles.container, {paddingTop:20}]}>
+              <Topic data={this.state.recommendTopic} navigator={this.props.navigator} />
+              <HrLine/>
+              <Recommend title="热门推荐" navigator={this.props.navigator}/>
+            </ScrollView>)
+            :
+            (<ActivityIndicator
+              animating={true}
+              style={[{height: 80}]}
+              size="large"
+              />)
         }
       </View>
     );
+  }
+
+  componentDidMount(){
+    this._fetchData();
+  }
+
+  _fetchData(callback){
+    var self = this;
+    Util.get('http://123.57.39.116:3000/data/read?type=config', function(data){
+      console.log(data)
+      if(data.status){
+        let obj = data.data;
+        self.setState({
+          isShow: true,
+          recommendTopic: obj.recommendTopic
+        });
+      }else{
+        alert('服务异常,正在紧急修复,请耐心等待');
+      }
+    }, function(err){
+      alert(err);
+      alert('服务异常,正在紧急修复,请耐心等待2');
+    });
   }
 }
 

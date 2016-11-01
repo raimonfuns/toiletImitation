@@ -19,17 +19,21 @@ class Topic extends Component{
   }
 
   render(){
+    let data = this.state.data;
+    let data0 = data[0];
+    let data1 = data[1];
     return (
       <View style={styles.tj}>
         <View style={styles.tjTitle}>
           <Text style={styles.bigText}>推荐专题</Text>
         </View>
         <View style={[styles.row,styles.tjTopic]}>
-          <TouchableOpacity style={[styles.tjTopicItem, {marginRight:5}]} onPress={this._showDetail.bind(this, "每一个孩子都是一棵小树", "http://mp.weixin.qq.com/s?__biz=MzI1OTE1MzU4NA==&mid=404852295&idx=1&sn=3223f39159d2d52917ff1a6dc50ee9c7#rd")}>
-            <Image source={{uri: "http://o94apbmjs.bkt.clouddn.com/yy.jpg"}} resizeMode="stretch" style={styles.img}/>
+          <TouchableOpacity style={[styles.tjTopicItem, {marginRight:5}]} onPress={this._showDetail.bind(this, data0.title, data0.url)}>
+            <Image source={{uri: data0.img}} resizeMode="stretch" style={styles.img}/>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.tjTopicItem, {marginLeft:5}]} onPress={this._showDetail.bind(this, "我想成为坐在路边鼓掌的人", "http://mp.weixin.qq.com/s?__biz=MzI1OTE1MzU4NA==&mid=506401864&idx=1&sn=d8ad06460b6e799642625282c15839b0#rd")}>
-            <Image source={{uri: "http://7xtp9h.com2.z0.glb.clouddn.com/1.png"}} resizeMode="stretch" style={styles.img}/>
+
+          <TouchableOpacity style={[styles.tjTopicItem, {marginLeft:5}]} onPress={this._showDetail.bind(this, data1.title, data1.url)}>
+            <Image source={{uri: data1.img}} resizeMode="stretch" style={styles.img}/>
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.tjTQ} onPress={this._showList.bind(this)}>
