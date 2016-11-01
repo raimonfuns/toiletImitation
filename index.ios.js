@@ -22,6 +22,9 @@ var img4_base64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAAB
 class toiletImitation extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selectedTab: 'toilet',
+    };
   }
 
   render() {
@@ -29,23 +32,47 @@ class toiletImitation extends Component {
       <TabBarIOS barTintColor="#fff" >
         <TabBarIOS.Item
           title="卫生间"
+          selected={this.state.selectedTab === 'toilet'}
           icon={{uri: img1_base64, scale:3.5}}
-          >
+          onPress={() => {
+            this.setState({
+              selectedTab: 'toilet'
+            });
+          }}>
+          <Text>卫生间</Text>
         </TabBarIOS.Item>
         <TabBarIOS.Item
           title="阅读"
+          selected={this.state.selectedTab === 'read'}
           icon={{uri: img2_base64, scale:3.5}}
-          >
+          onPress={() => {
+            this.setState({
+              selectedTab: 'read'
+            });
+          }}>
+          <Text>阅读</Text>
         </TabBarIOS.Item>
         <TabBarIOS.Item
           title="天气"
+          selected={this.state.selectedTab === 'weather'}
           icon={{uri: img3_base64, scale:3.5}}
-          >
+          onPress={() => {
+            this.setState({
+              selectedTab: 'weather'
+            });
+          }}>
+          <Text>天气</Text>
         </TabBarIOS.Item>
         <TabBarIOS.Item
           title="设置"
+          selected={this.state.selectedTab === 'setting'}
           icon={{uri: img4_base64, scale:3.5}}
-          >
+          onPress={() => {
+            this.setState({
+              selectedTab: 'setting'
+            });
+          }}>
+          <Text>设置</Text>
         </TabBarIOS.Item>
       </TabBarIOS>
     );
