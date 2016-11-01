@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import {
+  StyleSheet,
   Text,
   View
   } from 'react-native';
 
-class weather extends Component{
+import TWebView from './webview';
+//const url = 'http://localhost:4000/toilet/toilet/html/weather.html';
+const url = 'http://123.57.39.116:3000/html/weather.html';
+
+class Weather extends Component{
   render(){
-    return(
-      <View>
-        <Text>天气</Text>
-      </View>
-    );
+    return(<TWebView url={url} isWeather={true}/>);
   }
 }
 
-module.exports = weather;
+const styles = StyleSheet.create({
+
+});
+
+module.exports = Weather;
