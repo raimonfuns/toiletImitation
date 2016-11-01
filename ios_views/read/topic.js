@@ -8,6 +8,7 @@ import {
   } from 'react-native';
 
 import TWebView from './../webview';
+import List from './list';
 
 class Topic extends Component{
   constructor(props){
@@ -31,7 +32,7 @@ class Topic extends Component{
             <Image source={{uri: "http://7xtp9h.com2.z0.glb.clouddn.com/1.png"}} resizeMode="stretch" style={styles.img}/>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.tjTQ}>
+        <TouchableOpacity style={styles.tjTQ} onPress={this._showList.bind(this)}>
           <Text style={styles.tjTQText}>查看同期专题 &gt; </Text>
         </TouchableOpacity>
       </View>
@@ -46,6 +47,17 @@ class Topic extends Component{
       passProps:{
         url: url,
         isMargin:1
+      }
+    });
+  }
+
+  _showList(){
+    this.props.navigator.push({
+      component: List,
+      title: '推荐专题',
+      barTintColor: '#fff',
+      passProps:{
+        type: 'manager'
       }
     });
   }
