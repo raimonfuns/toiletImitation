@@ -21,7 +21,8 @@ class ReadView extends Component{
       isShow: false,
       recommendTopic: null,
       hotTopic: null,
-      category: null
+      category: null,
+      other: null,
     };
   }
 
@@ -39,6 +40,8 @@ class ReadView extends Component{
               <HrLine/>
               <Category data={this.state.category} navigator={this.props.navigator}/>
               <HrLine/>
+              <Recommend title="清新一刻" data={this.state.other} navigator={this.props.navigator} type="sanwen"/>
+              <Space/>
             </ScrollView>)
             :
             (<ActivityIndicator
@@ -65,7 +68,8 @@ class ReadView extends Component{
           isShow: true,
           recommendTopic: obj.recommendTopic,
           hotTopic: obj.hotTopic,
-          category: obj.category
+          category: obj.category,
+          other: obj.other
         });
       }else{
         alert('服务异常,正在紧急修复,请耐心等待');
@@ -99,6 +103,14 @@ class HrLine extends Component{
   }
 }
 
+class Space extends Component{
+  render(){
+    return (
+      <View style={styles.space}></View>
+    );
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1
@@ -108,6 +120,9 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     marginTop:20,
     marginBottom:10
+  },
+  space:{
+    height:70
   }
 });
 
